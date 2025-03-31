@@ -1,67 +1,108 @@
 "use client";
 
 import { motion } from 'framer-motion';
+import { Canvas } from '@react-three/fiber';
+import { Suspense } from 'react';
+import Scene from './Scene';
+import { useScroll, useTransform } from 'framer-motion';
+import { useRef } from 'react';
 
 export default function Hero() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end start"]
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+
   return (
-    <section className="h-screen flex items-center justify-center relative">
-      <div className="container mx-auto px-4">
-        <motion.div
+    <div ref={containerRef} className="h-screen w-full relative overflow-hidden">
+      {/* Canvas de Three.js */}
+      <div className="absolute inset-0 z-0">
+        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+          <Suspense fallback={null}>
+            <Scene scrollProgress={scrollYProgress} />
+          </Suspense>
+        </Canvas>
+      </div>
+
+      {/* Contenido del Hero */}
+      <motion.div 
+        style={{ y, opacity }}
+        className="relative z-10 h-full flex flex-col justify-center items-start px-8 md:px-16 lg:px-24"
+      >
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
+          transition={{ duration: 0.5 }}
+          className="text-[#64ffda] font-mono mb-5"
         >
-          <h2 className="text-teal-400 mb-4">¡Hola! Mi nombre es</h2>
-          <h1 className="text-5xl md:text-7xl font-bold mb-4 text-gray-100">
-            Braulio Navarrete
-          </h1>
-          <h3 className="text-3xl md:text-5xl font-bold mb-8 text-gray-300">
-            Fullstack Developer & Cofounder
-          </h3>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg mb-8">
-            Soy un desarrollador fullstack especializado en crear experiencias digitales excepcionales.
-            Cofundador de XENOMACODE y apasionado por la innovación tecnológica.
-          </p>
-          <motion.a
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-block bg-teal-500 text-white px-8 py-3 rounded-full font-medium hover:bg-teal-600 transition-colors"
-          >
-            ¡Contáctame!
-          </motion.a>
-        </motion.div>
-      </div>
-      
-      <motion.div
-        className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 1.5,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <a href="#about" className="text-gray-400 hover:text-teal-400">
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </a>
+          Hola, mi nombre es
+        </motion.p>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#ccd6f6] mb-4"
+        >
+          Braulio Navarrete.
+        </motion.h1>
+
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#8892b0] mb-6"
+        >
+          Construyo experiencias digitales.
+        </motion.h2>
+
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="max-w-lg text-[#8892b0] text-lg mb-12"
+        >
+          Soy un desarrollador full-stack especializado en construir experiencias digitales excepcionales. 
+          Actualmente, me enfoco en crear productos accesibles y centrados en el usuario.
+        </motion.p>
+
+        <motion.a
+          href="#projects"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="px-8 py-4 border-2 border-[#64ffda] text-[#64ffda] rounded hover:bg-[#64ffda15] transition-colors duration-300"
+        >
+          Ver mi trabajo
+        </motion.a>
       </motion.div>
-    </section>
+
+      {/* Scroll indicator */}
+      <motion.div
+        style={{ opacity }}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
+      >
+        <span className="text-[#8892b0] text-sm mb-2">Scroll</span>
+        <motion.div
+          animate={{
+            y: [0, 10, 0],
+          }}
+          transition={{
+            duration: 1.5,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+          className="w-6 h-10 border-2 border-[#8892b0] rounded-full flex justify-center"
+        >
+          <motion.div
+            className="w-1 h-2 bg-[#8892b0] rounded-full mt-2"
+          />
+        </motion.div>
+      </motion.div>
+    </div>
   );
 } 

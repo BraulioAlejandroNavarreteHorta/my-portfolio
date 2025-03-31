@@ -8,21 +8,22 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)'],
-        mono: ['var(--font-fira-code)'],
+        sans: ['var(--font-inter)', 'sans-serif'],
+        mono: ['var(--font-fira-code)', 'monospace'],
       },
       colors: {
-        primary: '#0a192f',
-        secondary: '#64ffda',
+        primary: '#64ffda',
+        secondary: '#112240',
         navy: {
-          light: '#172a45',
           DEFAULT: '#0a192f',
+          light: '#112240',
+          lightest: '#233554',
           dark: '#020c1b',
         },
         slate: {
-          light: '#a8b2d1',
           DEFAULT: '#8892b0',
-          dark: '#495670',
+          light: '#a8b2d1',
+          lightest: '#ccd6f6',
         },
       },
       animation: {

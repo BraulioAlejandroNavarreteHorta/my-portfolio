@@ -1,95 +1,174 @@
 "use client";
 
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
-const experiences = [
+interface Job {
+  company: string;
+  title: string;
+  period: string;
+  description: string[];
+  technologies: string[];
+}
+
+const jobs: Job[] = [
   {
-    title: 'Cofounder & Lead Developer',
-    company: 'XENOMACODE',
-    period: '2023 - Presente',
+    company: "XENOMACODE",
+    title: "Full Stack Developer",
+    period: "2022 - Presente",
     description: [
-      'Liderazgo de equipos de desarrollo y gestión de proyectos',
-      'Desarrollo de soluciones tecnológicas innovadoras',
-      'Implementación de metodologías ágiles y mejores prácticas',
-      'Arquitectura de sistemas y toma de decisiones técnicas',
+      "Desarrollo de aplicaciones web escalables utilizando Next.js y TypeScript.",
+      "Implementación de experiencias 3D interactivas con Three.js y React Three Fiber.",
+      "Optimización de rendimiento y SEO para aplicaciones web.",
+      "Colaboración en equipos multidisciplinarios utilizando metodologías ágiles."
     ],
+    technologies: ["Next.js", "TypeScript", "Three.js", "Node.js", "MongoDB"]
   },
   {
-    title: 'Fullstack Developer',
-    company: 'Freelance',
-    period: '2022 - Presente',
+    company: "Empresa Anterior",
+    title: "Frontend Developer",
+    period: "2020 - 2022",
     description: [
-      'Desarrollo de aplicaciones web personalizadas',
-      'Consultoría técnica para startups y empresas',
-      'Optimización y mantenimiento de sistemas existentes',
-      'Integración de APIs y servicios de terceros',
+      "Desarrollo de interfaces de usuario responsivas y accesibles.",
+      "Implementación de animaciones y transiciones fluidas con Framer Motion.",
+      "Integración de APIs RESTful y servicios de terceros.",
+      "Mantenimiento y mejora de aplicaciones existentes."
     ],
+    technologies: ["React", "JavaScript", "CSS", "Git", "REST APIs"]
   },
-  // Agrega más experiencias aquí
+  {
+    company: "Primera Empresa",
+    title: "Web Developer",
+    period: "2018 - 2020",
+    description: [
+      "Desarrollo de sitios web estáticos y dinámicos.",
+      "Implementación de diseños responsivos con HTML5 y CSS3.",
+      "Optimización de rendimiento y velocidad de carga.",
+      "Colaboración con diseñadores para implementar interfaces de usuario."
+    ],
+    technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"]
+  }
 ];
 
 export default function Experience() {
+  const [selectedJob, setSelectedJob] = useState(0);
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.1
   });
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <section id="experience" className="py-20 bg-[#0a192f]">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 50 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
+    <section id="experience" className="py-24 relative">
+      <motion.div
+        ref={ref}
+        variants={containerVariants}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        className="container mx-auto px-4"
+      >
+        <motion.h2 
+          variants={itemVariants}
+          className="text-3xl md:text-4xl font-bold mb-16 flex items-center"
         >
-          <h2 className="text-3xl font-bold text-center mb-12">
-            <span className="text-teal-400">Mi</span> Experiencia
-          </h2>
+          <span className="text-[#64ffda] font-mono mr-4">03.</span>
+          <span className="text-[#ccd6f6]">Experiencia</span>
+          <span className="flex-grow ml-4 h-[1px] bg-[#233554]"></span>
+        </motion.h2>
 
-          <div className="relative">
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 h-full w-1 bg-teal-400/20"></div>
-
-            {/* Experience items */}
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className={`relative mb-12 md:w-1/2 ${
-                  index % 2 === 0 ? 'md:pr-12 md:ml-0' : 'md:pl-12 md:ml-auto'
+        <div className="grid md:grid-cols-12 gap-4 md:gap-8">
+          {/* Tabs */}
+          <motion.div 
+            variants={itemVariants}
+            className="md:col-span-3 flex md:flex-col overflow-x-auto md:overflow-x-visible scrollbar-hide"
+          >
+            {jobs.map((job, index) => (
+              <button
+                key={job.company}
+                onClick={() => setSelectedJob(index)}
+                className={`px-4 py-2 text-sm font-mono whitespace-nowrap md:whitespace-normal text-left transition-all duration-300 border-b-2 md:border-b-0 md:border-l-2 ${
+                  selectedJob === index
+                    ? 'text-[#64ffda] border-[#64ffda] bg-[#112240]'
+                    : 'text-[#8892b0] border-[#233554] hover:text-[#64ffda] hover:bg-[#112240]'
                 }`}
               >
-                {/* Timeline dot */}
-                <div
-                  className={`absolute top-0 ${
-                    index % 2 === 0 ? 'right-0 md:-right-4' : 'left-0 md:-left-4'
-                  } w-8 h-8 bg-teal-400 rounded-full border-4 border-[#0a192f] z-10`}
-                ></div>
-
-                {/* Content */}
-                <div className="bg-gray-800/50 p-6 rounded-lg shadow-xl hover:shadow-teal-400/10 transition-shadow">
-                  <h3 className="text-xl font-bold text-teal-400 mb-1">{exp.title}</h3>
-                  <h4 className="text-lg font-semibold text-gray-300 mb-2">{exp.company}</h4>
-                  <p className="text-gray-400 mb-4">{exp.period}</p>
-                  <ul className="space-y-2">
-                    {exp.description.map((item, i) => (
-                      <li key={i} className="flex items-start text-gray-300">
-                        <span className="text-teal-400 mr-2">▹</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </motion.div>
+                {job.company}
+              </button>
             ))}
-          </div>
-        </motion.div>
-      </div>
+          </motion.div>
+
+          {/* Content */}
+          <motion.div 
+            variants={itemVariants}
+            className="md:col-span-9 pt-4 md:pt-0"
+          >
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3 }}
+              key={selectedJob}
+              className="space-y-4"
+            >
+              <h3 className="text-xl text-[#ccd6f6]">
+                <span className="font-semibold">{jobs[selectedJob].title}</span>
+                {" "}
+                <span className="text-[#64ffda]">@ {jobs[selectedJob].company}</span>
+              </h3>
+
+              <p className="font-mono text-sm text-[#8892b0]">
+                {jobs[selectedJob].period}
+              </p>
+
+              <ul className="space-y-4">
+                {jobs[selectedJob].description.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-[#64ffda] mr-2 mt-1">▹</span>
+                    <span className="text-[#8892b0]">{item}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div className="pt-4">
+                <h4 className="text-sm font-semibold text-[#ccd6f6] mb-2">
+                  Tecnologías utilizadas:
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {jobs[selectedJob].technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs font-mono text-[#64ffda] border border-[#64ffda] rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </motion.div>
     </section>
   );
 } 

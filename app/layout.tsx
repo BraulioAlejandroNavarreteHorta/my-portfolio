@@ -1,14 +1,23 @@
+import './globals.css';
+import { Inter, Fira_Code } from 'next/font/google';
 import type { Metadata } from "next";
-import { Inter, Fira_Code } from "next/font/google";
-import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"], variable: '--font-inter' });
-const firaCode = Fira_Code({ subsets: ["latin"], variable: '--font-fira-code' });
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
+
+const firaCode = Fira_Code({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-fira-code',
+});
 
 export const metadata: Metadata = {
-  title: "Braulio Navarrete | Fullstack Developer",
-  description: "Desarrollador Fullstack, Cofundador de XENOMACODE y estudiante de Ingeniería en Software",
-  keywords: ["Braulio Navarrete", "Fullstack Developer", "XENOMACODE", "React", "Next.js", "Software Engineer"],
+  title: 'Braulio Navarrete - Full Stack Developer',
+  description: 'Portfolio personal de Braulio Navarrete, desarrollador Full Stack especializado en crear experiencias digitales excepcionales.',
+  keywords: 'Braulio Navarrete, Full Stack Developer, React, Next.js, Three.js, Portfolio',
   authors: [{ name: "Braulio Navarrete" }],
   creator: "Braulio Navarrete",
   openGraph: {
@@ -29,12 +38,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <html lang="es" className={`scroll-smooth ${inter.variable} ${firaCode.variable}`}>
-      <body className={`${inter.className} bg-[#0a192f] text-gray-100 min-h-screen`}>
+    <html lang="es" className={`${inter.variable} ${firaCode.variable} bg-[#0a192f] text-gray-300 antialiased`}>
+      <body className="relative min-h-screen">
         {children}
       </body>
     </html>
