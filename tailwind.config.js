@@ -8,31 +8,29 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', 'sans-serif'],
-        mono: ['var(--font-fira-code)', 'monospace'],
+        heading: ['var(--font-syne)'],
+        body: ['var(--font-jakarta)'],
       },
       colors: {
         primary: '#64ffda',
         secondary: '#112240',
-        navy: {
-          DEFAULT: '#0a192f',
-          light: '#112240',
-          lightest: '#233554',
-          dark: '#020c1b',
-        },
-        slate: {
-          DEFAULT: '#8892b0',
-          light: '#a8b2d1',
-          lightest: '#ccd6f6',
-        },
+        tertiary: '#0a192f',
+        text: '#8892b0',
+        'text-light': '#ccd6f6',
       },
       animation: {
-        'float': 'float 6s ease-in-out infinite',
+        'gradient': 'gradient 8s linear infinite',
       },
       keyframes: {
-        float: {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-20px)' },
+        gradient: {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          },
         },
       },
     },

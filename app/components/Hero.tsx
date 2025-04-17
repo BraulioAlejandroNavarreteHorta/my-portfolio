@@ -46,7 +46,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#ccd6f6] mb-4"
+          className="text-4xl md:text-6xl lg:text-7xl font-heading font-extrabold text-[#ccd6f6] mb-4"
         >
           Braulio Navarrete.
         </motion.h1>
@@ -55,7 +55,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#8892b0] mb-6"
+          className="text-3xl md:text-5xl lg:text-6xl font-heading font-bold text-[#8892b0] mb-6"
         >
           Construyo experiencias digitales.
         </motion.h2>
@@ -64,7 +64,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="max-w-lg text-[#8892b0] text-lg mb-12"
+          className="max-w-lg text-[#8892b0] text-lg font-body mb-12"
         >
           Soy un desarrollador full-stack especializado en construir experiencias digitales excepcionales. 
           Actualmente, me enfoco en crear software de alta calidad y centrados en el usuario.
@@ -75,18 +75,15 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
-          className="px-8 py-4 border-2 border-[#64ffda] text-[#64ffda] rounded hover:bg-[#64ffda15] transition-colors duration-300"
+          className="px-8 py-4 border-2 border-[#64ffda] text-[#64ffda] rounded hover:bg-[#64ffda15] transition-colors duration-300 font-body"
         >
           Ver mi trabajo
         </motion.a>
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
-        style={{ opacity }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
-      >
-        <span className="text-[#8892b0] text-sm mb-2">Scroll</span>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center">
+        <span className="text-[#8892b0] text-sm mb-2 font-body">Scroll</span>
         <motion.div
           animate={{
             y: [0, 10, 0],
@@ -96,13 +93,21 @@ export default function Hero() {
             repeat: Infinity,
             repeatType: "reverse",
           }}
-          className="w-6 h-10 border-2 border-[#8892b0] rounded-full flex justify-center"
+          className="w-6 h-10 border-2 border-[#8892b0] rounded-full flex justify-center pt-2"
         >
           <motion.div
-            className="w-1 h-2 bg-[#8892b0] rounded-full mt-2"
+            animate={{
+              y: [0, 8, 0],
+            }}
+            transition={{
+              duration: 1.5,
+              repeat: Infinity,
+              repeatType: "reverse",
+            }}
+            className="w-1 h-1 bg-[#8892b0] rounded-full"
           />
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 } 

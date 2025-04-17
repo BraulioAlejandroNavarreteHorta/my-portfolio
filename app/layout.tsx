@@ -1,38 +1,69 @@
 import './globals.css';
-import { Inter, Fira_Code } from 'next/font/google';
+import { Syne, Plus_Jakarta_Sans } from 'next/font/google';
 import type { Metadata } from "next";
 
-const inter = Inter({
+const syne = Syne({ 
   subsets: ['latin'],
+  variable: '--font-syne',
   display: 'swap',
-  variable: '--font-inter',
+  weight: ['400', '500', '600', '700', '800'],
 });
 
-const firaCode = Fira_Code({
+const jakarta = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
+  variable: '--font-jakarta',
   display: 'swap',
-  variable: '--font-fira-code',
 });
 
 export const metadata: Metadata = {
-  title: 'Braulio Navarrete - Full Stack Developer',
-  description: 'Portfolio personal de Braulio Navarrete, desarrollador Full Stack especializado en crear experiencias digitales excepcionales.',
-  keywords: 'Braulio Navarrete, Full Stack Developer, React, Next.js, Three.js, Portfolio',
-  authors: [{ name: "Braulio Navarrete" }],
-  creator: "Braulio Navarrete",
+  title: 'Braulio Navarrete | Desarrollador Full Stack & Co-Fundador',
+  description: 'Desarrollador Full Stack especializado en React, Node.js y tecnologías cloud. Co-Fundador de XENOMACODE, creando soluciones innovadoras con IA y desarrollo web moderno.',
+  keywords: ['Desarrollador Full Stack', 'React', 'Node.js', 'TypeScript', 'Next.js', 'AWS', 'XENOMACODE', 'Inteligencia Artificial'],
+  authors: [{ name: 'Braulio Navarrete', url: 'https://github.com/braulionavarrete' }],
   openGraph: {
-    type: "website",
-    locale: "es_MX",
-    url: "https://braulionavarrete.com",
-    title: "Braulio Navarrete | Fullstack Developer",
-    description: "Desarrollador Fullstack, Cofundador de XENOMACODE y estudiante de Ingeniería en Software",
-    siteName: "Braulio Navarrete Portfolio",
+    title: 'Braulio Navarrete | Desarrollador Full Stack & Co-Fundador',
+    description: 'Desarrollador Full Stack especializado en React, Node.js y tecnologías cloud. Co-Fundador de XENOMACODE.',
+    url: 'https://braulionavarrete.dev',
+    siteName: 'Portfolio de Braulio Navarrete',
+    images: [
+      {
+        url: '/profile.jpg',
+        width: 800,
+        height: 600,
+        alt: 'Braulio Navarrete - Desarrollador Full Stack'
+      }
+    ],
+    locale: 'es_ES',
+    type: 'website',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Braulio Navarrete | Fullstack Developer",
-    description: "Desarrollador Fullstack, Cofundador de XENOMACODE y estudiante de Ingeniería en Software",
-    creator: "@tuusuario",
+    card: 'summary_large_image',
+    title: 'Braulio Navarrete | Desarrollador Full Stack & Co-Fundador',
+    description: 'Desarrollador Full Stack especializado en React, Node.js y tecnologías cloud. Co-Fundador de XENOMACODE.',
+    creator: '@braulionavarret',
+    images: ['/profile.jpg'],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon/favicon.ico' },
+      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/favicon/apple-touch-icon.png' }
+    ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/favicon/safari-pinned-tab.svg',
+        color: '#112240'
+      }
+    ]
+  },
+  manifest: '/manifest.json',
+  themeColor: '#112240',
+  appleWebApp: {
+    title: 'Braulio Navarrete',
+    statusBarStyle: 'default',
   },
 };
 
@@ -42,8 +73,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="es" className={`${inter.variable} ${firaCode.variable} bg-[#0a192f] text-gray-300 antialiased`}>
-      <body className="relative min-h-screen">
+    <html lang="es" className={`${syne.variable} ${jakarta.variable} bg-[#0a192f] text-gray-300 antialiased`}>
+      <head>
+        <meta name="msapplication-TileColor" content="#112240" />
+        <meta name="theme-color" content="#112240" />
+      </head>
+      <body className="relative min-h-screen font-body">
         {children}
       </body>
     </html>

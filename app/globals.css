@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --font-syne: 'Syne', sans-serif;
+    --font-jakarta: 'Plus Jakarta Sans', sans-serif;
+  }
+}
+
 /* Cursor personalizado */
 .cursor-dot {
   width: 5px;
