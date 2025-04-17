@@ -6,10 +6,13 @@ import { useInView } from 'react-intersection-observer';
 
 interface Job {
   company: string;
-  title: string;
+  role?: string;
+  title?: string;
   period: string;
-  description: string[];
+  location?: string;
+  description: string | string[];
   technologies: string[];
+  achievements: string[];
 }
 
 const jobs: Job[] = [
@@ -51,6 +54,39 @@ const jobs: Job[] = [
   }
 ];
 
+const experiences: Job[] = [
+  {
+    company: "Inventer",
+    title: "Desarrollador de software Full Stack",
+    period: "Abril 2024 - Presente",
+    location: "León, Guanajuato, México",
+    description: "Orquesto la migración del sitio web de préstamos en línea VIVUS desde REACT a DjangoCMS, mejorando la eficiencia del sistema en un 30% y reduciendo los tiempos de carga en un 50% mediante una arquitectura más robusta.",
+    technologies: ["React", "Django", "Python", "FastAPI", "Flask", "TypeScript", "AWS"],
+    achievements: [
+      "Desarrollo de backend en el framework de python DJANGO para una plataforma sobre automatización de los procesos de máquinas expendedoras",
+      "Desarrollo de pantallas para la plataforma web usando REACT y REACT NATIVE para la aplicación multiplataforma",
+      "Desarrollo de una API completa en el framework de python FLASK para escaneo de vulnerabilidades de dominios",
+      "Mantenimiento y correcciones del sitio de ciberseguridad XENKO usando FASTAPI y REACT",
+      "Colaborador en el desarrollo de backend y frontend en la plataforma de firma electrónica ZIGNATRUE"
+    ]
+  },
+  {
+    company: "Peletería Central",
+    title: "Encargado de confianza",
+    period: "Agosto 2014 - Presente",
+    location: "Av. Central 1031, Col. Guadalupe, León, Guanajuato, México",
+    description: "Administro y optimizo la plataforma de e-business implementada, monitorizando métricas de conversión y satisfacción del cliente.",
+    technologies: ["E-commerce", "Gestión de inventarios", "Logística", "Atención al cliente"],
+    achievements: [
+      "Desarrollé e implementé un sistema completo de e-business, incluyendo tienda online y estrategia digital",
+      "Supervisé el inventario de materiales, asegurando niveles óptimos de stock y minimizando faltantes",
+      "Implementé estrategias para mejorar la logística de distribución, optimizando rutas de entrega",
+      "Colaboré en la selección y evaluación de proveedores, negociando condiciones favorables",
+      "Capacité al nuevo personal en procedimientos de atención al cliente y conocimiento técnico de productos"
+    ]
+  }
+];
+
 export default function Experience() {
   const [selectedJob, setSelectedJob] = useState(0);
   const [ref, inView] = useInView({
@@ -81,92 +117,57 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="py-24 relative">
+    <section id="experience" className="py-20">
       <motion.div
         ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
         className="container mx-auto px-4"
       >
-        <motion.h2 
-          variants={itemVariants}
-          className="text-3xl md:text-4xl font-bold mb-16 flex items-center"
-        >
-          <span className="text-[#64ffda] font-mono mr-4">03.</span>
-          <span className="text-[#ccd6f6]">Experiencia</span>
-          <span className="flex-grow ml-4 h-[1px] bg-[#233554]"></span>
-        </motion.h2>
-
-        <div className="grid md:grid-cols-12 gap-4 md:gap-8">
-          {/* Tabs */}
-          <motion.div 
-            variants={itemVariants}
-            className="md:col-span-3 flex md:flex-col overflow-x-auto md:overflow-x-visible scrollbar-hide"
-          >
-            {jobs.map((job, index) => (
-              <button
-                key={job.company}
-                onClick={() => setSelectedJob(index)}
-                className={`px-4 py-2 text-sm font-mono whitespace-nowrap md:whitespace-normal text-left transition-all duration-300 border-b-2 md:border-b-0 md:border-l-2 ${
-                  selectedJob === index
-                    ? 'text-[#64ffda] border-[#64ffda] bg-[#112240]'
-                    : 'text-[#8892b0] border-[#233554] hover:text-[#64ffda] hover:bg-[#112240]'
-                }`}
-              >
-                {job.company}
-              </button>
-            ))}
-          </motion.div>
-
-          {/* Content */}
-          <motion.div 
-            variants={itemVariants}
-            className="md:col-span-9 pt-4 md:pt-0"
-          >
+        <h2 className="text-3xl font-bold mb-12 text-primary">Experiencia Profesional</h2>
+        <div className="space-y-12">
+          {experiences.map((exp, index) => (
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.3 }}
-              key={selectedJob}
-              className="space-y-4"
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              animate={inView ? { opacity: 1, x: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="bg-gray-800 rounded-lg p-6 shadow-xl"
             >
-              <h3 className="text-xl text-[#ccd6f6]">
-                <span className="font-semibold">{jobs[selectedJob].title}</span>
-                {" "}
-                <span className="text-[#64ffda]">@ {jobs[selectedJob].company}</span>
-              </h3>
-
-              <p className="font-mono text-sm text-[#8892b0]">
-                {jobs[selectedJob].period}
-              </p>
-
-              <ul className="space-y-4">
-                {jobs[selectedJob].description.map((item, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="text-[#64ffda] mr-2 mt-1">▹</span>
-                    <span className="text-[#8892b0]">{item}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="pt-4">
-                <h4 className="text-sm font-semibold text-[#ccd6f6] mb-2">
-                  Tecnologías utilizadas:
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {jobs[selectedJob].technologies.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs font-mono text-[#64ffda] border border-[#64ffda] rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+                <div>
+                  <h3 className="text-2xl font-bold text-primary">{exp.company}</h3>
+                  <p className="text-gray-300">{exp.role || exp.title}</p>
+                  {exp.location && (
+                    <p className="text-gray-400 text-sm mt-1">{exp.location}</p>
+                  )}
                 </div>
+                <span className="text-primary font-mono mt-2 md:mt-0">{exp.period}</span>
+              </div>
+              <p className="text-gray-300 mb-4">
+                {typeof exp.description === 'string' ? exp.description : exp.description.join(' • ')}
+              </p>
+              <div className="mb-4">
+                <h4 className="text-lg font-semibold text-primary mb-2">Logros y Responsabilidades</h4>
+                <ul className="list-disc list-inside text-gray-300 space-y-1">
+                  {exp.achievements.map((achievement, i) => (
+                    <li key={i}>{achievement}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {exp.technologies.map((tech, i) => (
+                  <span
+                    key={i}
+                    className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
             </motion.div>
-          </motion.div>
+          ))}
         </div>
       </motion.div>
     </section>

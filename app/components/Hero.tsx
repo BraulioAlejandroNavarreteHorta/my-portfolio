@@ -67,7 +67,7 @@ export default function Hero() {
           className="max-w-lg text-[#8892b0] text-lg mb-12"
         >
           Soy un desarrollador full-stack especializado en construir experiencias digitales excepcionales. 
-          Actualmente, me enfoco en crear productos accesibles y centrados en el usuario.
+          Actualmente, me enfoco en crear software de alta calidad y centrados en el usuario.
         </motion.p>
 
         <motion.a

@@ -8,166 +8,127 @@ import Image from 'next/image';
 interface Project {
   title: string;
   description: string;
-  image: string;
   technologies: string[];
-  github?: string;
-  live?: string;
-  reverse?: boolean;
+  image: string;
+  link: string;
+  github: string;
 }
 
 const projects: Project[] = [
   {
-    title: "Portfolio 3D",
-    description: "Un portafolio personal interactivo construido con Next.js, Three.js y Framer Motion. Presenta una experiencia inmersiva con animaciones fluidas y efectos 3D.",
-    image: "/projects/portfolio.jpg",
-    technologies: ["Next.js", "Three.js", "Framer Motion", "TailwindCSS"],
-    github: "https://github.com/username/portfolio",
-    live: "https://portfolio.com"
+    title: "XENOMACODE Platform",
+    description: "Plataforma integral de desarrollo y gestión de proyectos tecnológicos, implementando arquitectura serverless y microservicios.",
+    technologies: ["Next.js", "Node.js", "AWS"],
+    image: "/images/xenomacode.png",
+    link: "https://xenomacode.com",
+    github: "https://github.com/XenomaCode"
   },
   {
-    title: "E-commerce Platform",
-    description: "Plataforma de comercio electrónico completa con carrito de compras, pasarela de pagos y panel de administración. Implementada con Next.js y MongoDB.",
-    image: "/projects/ecommerce.jpg",
-    technologies: ["Next.js", "MongoDB", "Stripe", "TypeScript"],
-    github: "https://github.com/username/ecommerce",
-    live: "https://ecommerce.com",
-    reverse: true
+    title: "Weightlifting Technique Analysis",
+    description: "Este proyecto emplea visión artificial, inteligencia artificial y aprendizaje automático con MediaPipe para analizar técnicas de levantamiento de pesas, identificando errores y aciertos para prevenir lesiones y mejorar el rendimiento de los atletas.",
+    technologies: ["Python", "TensorFlow", "MediaPipe", "NumPy", "Jupyter Notebook"],
+    image: "/images/Weightlifting-Technique-Analysis.png",
+    link: "https://github.com/BraulioAlejandroNavarreteHorta/WeightliftingTechniqueAnalysis",
+    github: "https://github.com/BraulioAlejandroNavarreteHorta/WeightliftingTechniqueAnalysis"
   },
   {
-    title: "Task Management App",
-    description: "Aplicación de gestión de tareas con características de colaboración en tiempo real, notificaciones y análisis de productividad.",
-    image: "/projects/tasks.jpg",
-    technologies: ["React", "Node.js", "Socket.io", "PostgreSQL"],
-    github: "https://github.com/username/tasks",
-    live: "https://tasks.com"
+    title: "Peletería Central E-Bussiness",
+    description: "Plataforma de comercio electrónico para la venta de productos para la elaborción de calzado.",
+    technologies: ["Next.js", "Node.js", "AWS", "Firebase"],
+    image: "/images/peleteria-central.png",
+    link: "https://peleteria-central.xenomacode.com/",
+    github: "https://github.com/XenomaCode"
+  },
+  {
+    title: "Park Finder Landing Page",
+    description: "Landing page para la plataforma Park Finder, una aplicación móvil que permite a los usuarios encontrar y reservar lugar de estacionamiento en tiempo real.",
+    technologies: ["Next.js", "Node.js", "Tailwind CSS"],
+    image: "/images/park-finder-landing.png",
+    link: "https://parkfinder.xenomacode.com/",
+    github: "https://github.com/XenomaCode"
+  },
+  {
+    title: "Park Finder App",
+    description: "Aplicación móvil para la plataforma Park Finder, una aplicación móvil que permite a los usuarios encontrar y reservar lugar de estacionamiento en tiempo real.",
+    technologies: ["Flutter", "Dart", "Firebase"],
+    image: "/images/park-finder-app.png",
+    link: "https://parkfinder.xenomacode.com/",
+    github: "https://github.com/XenomaCode"
+  },
+  {
+    title: "OPEN AI & GOOGLE CLOUD Vision API",
+    description: "Integración de OpenAI con Google Cloud para la interpretación y validación de transferencias bancarias",
+    technologies: ["Python", "OpenAI", "Google Cloud", "FastAPI", "Vision API"],
+    image: "/images/openai-google-cloud.png",
+    link: "https://github.com/XenomaCode",
+    github: "https://github.com/XenomaCode"
   }
 ];
 
-export default function Projects() {
+const Projects = () => {
   const [ref, inView] = useInView({
     triggerOnce: true,
-    threshold: 0.1
+    threshold: 0.1,
   });
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut"
-      }
-    }
-  };
-
   return (
-    <section id="projects" className="py-24 relative">
+    <section id="projects" className="py-20">
       <motion.div
         ref={ref}
-        variants={containerVariants}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
         className="container mx-auto px-4"
       >
-        <motion.h2 
-          variants={itemVariants}
-          className="text-3xl md:text-4xl font-bold mb-16 flex items-center"
-        >
-          <span className="text-[#64ffda] font-mono mr-4">02.</span>
-          <span className="text-[#ccd6f6]">Proyectos Destacados</span>
-          <span className="flex-grow ml-4 h-[1px] bg-[#233554]"></span>
-        </motion.h2>
-
-        <div className="space-y-32">
+        <h2 className="text-3xl font-bold mb-12 text-primary">Proyectos Destacados</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <motion.div
-              key={project.title}
-              variants={itemVariants}
-              className={`relative grid md:grid-cols-12 items-center gap-4 md:gap-8 ${
-                project.reverse ? 'md:text-right' : ''
-              }`}
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="bg-gray-800 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300"
             >
-              {/* Contenido */}
-              <div className={`md:col-span-7 ${project.reverse ? 'md:col-start-6' : ''} relative z-10`}>
-                <motion.h3
-                  variants={itemVariants}
-                  className="text-2xl font-bold text-[#ccd6f6] mb-4"
-                >
-                  {project.title}
-                </motion.h3>
-
-                <motion.div
-                  variants={itemVariants}
-                  className="gradient-border p-6 bg-[#112240] shadow-xl mb-4"
-                >
-                  <p className="text-[#8892b0]">{project.description}</p>
-                </motion.div>
-
-                <motion.div
-                  variants={itemVariants}
-                  className={`flex gap-4 flex-wrap text-sm text-[#8892b0] mb-4 ${
-                    project.reverse ? 'md:justify-end' : ''
-                  }`}
-                >
-                  {project.technologies.map(tech => (
-                    <span key={tech} className="font-mono">{tech}</span>
-                  ))}
-                </motion.div>
-
-                <motion.div
-                  variants={itemVariants}
-                  className={`flex gap-4 ${project.reverse ? 'md:justify-end' : ''}`}
-                >
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#ccd6f6] hover:text-[#64ffda] transition-colors"
-                    >
-                      <FiGithub size={20} />
-                    </a>
-                  )}
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[#ccd6f6] hover:text-[#64ffda] transition-colors"
-                    >
-                      <FiExternalLink size={20} />
-                    </a>
-                  )}
-                </motion.div>
+              <div className="relative h-48">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
               </div>
-
-              {/* Imagen */}
-              <div className={`md:col-span-7 ${
-                project.reverse ? 'md:col-start-1 md:row-start-1' : 'md:col-start-6'
-              } relative`}>
-                <motion.div
-                  variants={itemVariants}
-                  className="relative aspect-video group"
-                >
-                  <div className="absolute inset-0 bg-[#64ffda] mix-blend-screen opacity-20 group-hover:opacity-0 transition-opacity duration-300 z-10"></div>
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    fill
-                    className="object-cover rounded-lg"
-                  />
-                </motion.div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold text-primary mb-2">{project.title}</h3>
+                <p className="text-gray-300 mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.technologies.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex gap-4">
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                  >
+                    Ver Proyecto
+                  </a>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                  >
+                    GitHub
+                  </a>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -175,4 +136,6 @@ export default function Projects() {
       </motion.div>
     </section>
   );
-} 
+};
+
+export default Projects; 

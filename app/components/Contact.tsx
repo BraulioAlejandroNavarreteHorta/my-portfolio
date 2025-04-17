@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { FiGithub, FiLinkedin, FiTwitter, FiMail } from 'react-icons/fi';
+import { FiGithub, FiLinkedin, FiMail, FiX } from 'react-icons/fi';
 
 export default function Contact() {
   const [ref, inView] = useInView({
@@ -36,22 +36,22 @@ export default function Contact() {
     {
       name: 'GitHub',
       icon: FiGithub,
-      url: 'https://github.com/username'
+      url: 'https://github.com/BraulioAlejandroNavarreteHorta'
     },
     {
       name: 'LinkedIn',
       icon: FiLinkedin,
-      url: 'https://linkedin.com/in/username'
+      url: 'https://www.linkedin.com/in/braulio-alejandro-navarrete-horta-024248274/'
     },
     {
-      name: 'Twitter',
-      icon: FiTwitter,
-      url: 'https://twitter.com/username'
+      name: 'X',
+      icon: FiX,
+      url: 'https://x.com/Braulio01478207'
     },
     {
       name: 'Email',
       icon: FiMail,
-      url: 'mailto:email@example.com'
+      url: 'mailto:braulio.navarrete@xenomacode.com'
     }
   ];
 
@@ -110,7 +110,7 @@ export default function Contact() {
 
           <motion.a
             variants={itemVariants}
-            href="mailto:email@example.com"
+            href="mailto:braulio.navarrete@xenomacode.com"
             className="inline-block px-8 py-4 text-[#64ffda] border-2 border-[#64ffda] rounded
                      hover:bg-[#64ffda15] transition-colors duration-300"
           >

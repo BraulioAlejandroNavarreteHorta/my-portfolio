@@ -3,6 +3,7 @@
 import { useRef } from 'react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import Education from './components/Education';
 
 // Importar componentes
 const Hero = dynamic(() => import('./components/Hero'), { ssr: false });
@@ -42,8 +43,9 @@ export default function Home() {
       
       <div className="relative z-10">
         <About />
-        <Projects />
         <Experience />
+        <Education />
+        <Projects />
         <Contact />
       </div>
 
