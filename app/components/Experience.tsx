@@ -15,44 +15,7 @@ interface Job {
   achievements: string[];
 }
 
-const jobs: Job[] = [
-  {
-    company: "XENOMACODE",
-    title: "Full Stack Developer",
-    period: "2022 - Presente",
-    description: [
-      "Desarrollo de aplicaciones web escalables utilizando Next.js y TypeScript.",
-      "Implementación de experiencias 3D interactivas con Three.js y React Three Fiber.",
-      "Optimización de rendimiento y SEO para aplicaciones web.",
-      "Colaboración en equipos multidisciplinarios utilizando metodologías ágiles."
-    ],
-    technologies: ["Next.js", "TypeScript", "Three.js", "Node.js", "MongoDB"]
-  },
-  {
-    company: "Empresa Anterior",
-    title: "Frontend Developer",
-    period: "2020 - 2022",
-    description: [
-      "Desarrollo de interfaces de usuario responsivas y accesibles.",
-      "Implementación de animaciones y transiciones fluidas con Framer Motion.",
-      "Integración de APIs RESTful y servicios de terceros.",
-      "Mantenimiento y mejora de aplicaciones existentes."
-    ],
-    technologies: ["React", "JavaScript", "CSS", "Git", "REST APIs"]
-  },
-  {
-    company: "Primera Empresa",
-    title: "Web Developer",
-    period: "2018 - 2020",
-    description: [
-      "Desarrollo de sitios web estáticos y dinámicos.",
-      "Implementación de diseños responsivos con HTML5 y CSS3.",
-      "Optimización de rendimiento y velocidad de carga.",
-      "Colaboración con diseñadores para implementar interfaces de usuario."
-    ],
-    technologies: ["HTML", "CSS", "JavaScript", "PHP", "MySQL"]
-  }
-];
+
 
 const experiences: Job[] = [
   {

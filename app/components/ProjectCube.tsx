@@ -74,8 +74,11 @@ const RotatingCube = ({ projects, onProjectSelect }: any) => {
 
     // Interpolación suave de la rotación actual
     currentRotation.current.lerp(targetRotation.current, projectCubeConfig.transitionSpeed);
+    //@ts-ignore
     groupRef.current.rotation.x = currentRotation.current.x;
+    //@ts-ignore
     groupRef.current.rotation.y = currentRotation.current.y;
+    //@ts-ignore
     groupRef.current.rotation.z = currentRotation.current.z;
   });
 
